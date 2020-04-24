@@ -1,0 +1,14 @@
+{
+  "name": "Movie Search App",
+  "version": "1.0.0",
+  "description": "App to Search movies using TMDB database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zia Khan",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
+}

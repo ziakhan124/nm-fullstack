@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Movies Search Engine</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    var searchRequest = null;
+
+    // AJAX function which will send request to backend when words in search bar
+    // is more than 3 in length
+
+    $(function () {
+      var minlength = 1;
+
+      $("#movie_search").keyup(function () {
+        var that = this,
+          value = $(this).val();
+
+        if (value.length >= minlength) {
+          if (searchRequest != null)
+            searchRequest.abort();
+          searchRequest = $.ajax({
+            type: "GET",
+            url: "/search_movie",
+            data: value, // request is the value of search input
+            dataType: "text",
+            success: function (msg) {
+
+              console.log(msg);
+              var json = JSON.parse(msg);
+              $("#div-my").html(""); // Clear page before printing new data from new request
+
+              $.each(json, function (i, item) {
+
+                // condition to check for any null image 
+                // if tem.poster_path is null then it will display https://www.esm.rochester.edu/uploads/NoPhotoAvailable-335x419.jpg
+                var imageUrl = !item.poster_path ?
+                  "https://www.esm.rochester.edu/uploads/NoPhotoAvailable-335x419.jpg" :
+                  "https://image.tmdb.org/t/p/w300" + item.poster_path;
+
+                $("#div-my").append(
+                  "<div class='col-lg-4 col-md-6 '> <div class='card style='width: 18rem;''> <div class='card' > <img class='card-img-top' src='" +
+                  imageUrl +
+                  "' alt='Card image cap'><div class='card-body'><h5 class='card-title' style=text-align:'center;' >" +
+                  item.title + "</h5><p class='card-text' >" + item.overview +
+                  "</p></div></div></div></div>");
+              });
+            }
+          });
+        }
+      });
+    });
+  </script>
+  <style>
+    body{
+      background-color:#DEDEDE;
+    }
+    img {
+      border-radius: 8px;
+  
+    }
+    .font{
+      padding: 10px;
+      border: 2px;
+      text-align: center;
+      background: #4d6361;
+      
+      color:rgb(209, 228, 225);
+      font-size: 60px;
+    }
+    .para{
+      text-align: center;
+      font-size: large;
+      font-weight: bold;
+      font-style:initial;
+      color:rgb(209, 228, 225);
+     
+
+    }
+    .card-title{
+      font-weight: bolder;
+      text-align: center;
+    }
+    .card{
+      width: 350px;
+      height: 800px;
+    }
+    .card-text{
+      overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 5; /* number of lines to show */
+   -webkit-box-orient: vertical;
+    }
+    
+    .form-control{
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 40px;
+  width: 370%;
+  padding: 2px 23px 2px 30px;
+  background-color: #f5f5f5;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+    }
+    .navbar{
+      background-color: rebeccapurple;
+    }
+    .jumbotron{
+      background-color: rgb(41, 40, 41);
+    }
+    .line{
+      border: 2px solid;
+      padding-top: 0pc;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      
+    </div>
+  </nav>
+
+  <div class="jumbotron ">
+    <h1 class="font">Movie Search</h1>
+    <p class="para">This is a responsive page! You can resize the page to see affect!</p>
+    <div class="container">
+      <div class="row">
+        <div class="form-group" style="background-color: sandybrown; ">
+          <input type="text" class="form-control" name="movie_search" id="movie_search" placeholder="Search"
+            aria-label="Search">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class='row'  id="div-my">
+    
+
+      <!-- data will print here -->
+    
+    </div>
+  </div>
+  <hr class="line">
+  <footer>&copy; Copyright 2020</footer>
+
+</body>
+
+</html>

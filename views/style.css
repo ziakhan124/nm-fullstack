@@ -1,0 +1,62 @@
+body{
+    background-color:#DEDEDE;
+  }
+  img {
+    border-radius: 8px;
+
+  }
+  .font{
+    padding: 10px;
+    border: 2px;
+    text-align: center;
+    background: #4d6361;
+    
+    color:rgb(209, 228, 225);
+    font-size: 60px;
+  }
+  .para{
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    font-style:initial;
+    color:rgb(209, 228, 225);
+   
+
+  }
+  .card-title{
+    font-weight: bolder;
+    text-align: center;
+  }
+  .card{
+    width: 350px;
+    height: 800px;
+  }
+  .card-text{
+    overflow: hidden;
+ text-overflow: ellipsis;
+ display: -webkit-box;
+ -webkit-line-clamp: 5; /* number of lines to show */
+ -webkit-box-orient: vertical;
+  }
+  
+  .form-control{
+border: 1px solid grey;
+border-radius: 5px;
+height: 40px;
+width: 370%;
+padding: 2px 23px 2px 30px;
+background-color: #f5f5f5;
+font-size: 20px;
+font-family: 'Roboto', sans-serif;
+overflow: hidden;
+  }
+  .navbar{
+    background-color: rebeccapurple;
+  }
+  .jumbotron{
+    background-color: rgb(41, 40, 41);
+  }
+  .line{
+    border: 2px solid;
+    padding-top: 0pc;
+  }
